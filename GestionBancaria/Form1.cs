@@ -2,46 +2,49 @@ namespace GestionBancaria
 {
     public partial class Form1 : Form
     {
-        private double saldo = 1000;  // Saldo inicial de la cuenta, 1000€
+        private double saldodamirGrim1dam = 1000;  // Saldo inicial de la cuenta, 1000€
 
         public Form1()
         {
             InitializeComponent();
-            txtSaldo.Text = saldo.ToString();
+            txtSaldo.Text = saldodamirGrim1dam.ToString();
             txtCantidad.Text = "0";
         }
 
-        private bool realizarReintegro(double cantidad)
+        private bool realizarReintegro(double cantidadgrimaylo2)
         {
-            if (cantidad > 0 && saldo > cantidad)
+            if (cantidadgrimaylo2 > 0 && saldodamirGrim1dam >= cantidadgrimaylo2)
             {
-                saldo -= cantidad;
+                saldodamirGrim1dam -= cantidadgrimaylo2;
                 return true;
             }
             return false;
         }
 
-        private void realizarIngreso(double cantidad)
+        private void realizarIngreso(double cantidadgrimaylo2)
         {
-            if (cantidad > 0)
-                saldo += cantidad;
+            if (cantidadgrimaylo2 > 0)
+                saldodamirGrim1dam += cantidadgrimaylo2;
         }
 
         private void btOperar_Click(object sender, EventArgs e)
         {
-            double cantidad = Convert.ToDouble(txtCantidad.Text); // Cogemos la cantidad del TextBox y la pasamos a número
-            if (cantidad < 0)
+            double cantidadgrimaylo2 = Convert.ToDouble(txtCantidad.Text); // Cogemos la cantidad del TextBox y la pasamos a número
+            if (cantidadgrimaylo2 <= 0)
             {
                 MessageBox.Show("Cantidad no válidá, sólo se admiten cantidades positivas.");
             }
+
             if (rbReintegro.Checked)
             {
-                if (realizarReintegro(cantidad) == false)  // No se ha podido completar la operación, saldo insuficiente?
+                if (realizarReintegro(cantidadgrimaylo2) == false)  // No se ha podido completar la operación, saldo insuficiente?
                     MessageBox.Show("No se ha podido realizar la operación (¿Saldo insuficiente?)");
             }
             else
-                realizarIngreso(cantidad);
-            txtSaldo.Text = saldo.ToString();
+            
+                realizarIngreso(cantidadgrimaylo2);
+                txtSaldo.Text = saldodamirGrim1dam.ToString();
+            
         }
     }
 }
